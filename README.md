@@ -1,2 +1,2 @@
 # lfg
-A web that connects party goes and table top gamers. 
+A web app that connects party goers and table top gamers. 
