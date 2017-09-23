@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header.jsx';
 import Map from './Map.jsx';
 import Pin from './Pin.jsx';
-import { initMap, loadJS, renderMap } from '../../utils/utils.js';
+import { initMap, loadJS, renderMap } from '../../lib/api.js';
 
 class App extends React.Component {
   constructor(props) {
