@@ -28,7 +28,7 @@ app.use( session(app) ); //using default CONFIG above
 
 
 app.use( bodyParser() );
-app.use( serve(__dirname + '/client/dist') );
+app.use( serve(__dirname + '/client') );
 
 router
   // .get('/bundle.js', browserify('./client/index.js'),
