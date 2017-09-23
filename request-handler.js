@@ -1,5 +1,4 @@
 const User = require('/models/user.js');
-// const User = require('/models/user.js');
 
 // exports.logout = (ctx) => {
 //   // req.session.destroy(function() {
