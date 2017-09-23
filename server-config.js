@@ -2,15 +2,18 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const Router = require('koa-router');
 const session = require('koa-session');
+// const browserify = require('browserify-middleware');
+const serve = require('koa-static');
 
 // const config = require('./config.js'); //uncomment when ready to connect to db
 const app = new Koa();
 const router = new Router();
 const port = 3000;
 
+
 /*
 // Authentication
-app.keys = ['some secret keys'];
+app.keys = ['praise the sun'];
 const CONFIG = {
   key: 'koa:sess',
   maxAge: 86400000,
@@ -23,16 +26,15 @@ const CONFIG = {
 app.use( session(app) ); //using default CONFIG above
 */
 
+
 app.use( bodyParser() );
+app.use( serve(__dirname + '/client/dist') );
 
 router
-  .get('/', (ctx) => {
-    // load all pins from db.pins
-    // render all pins
-    // ctx.body = "hello world!";
-    ctx.body = "Hello World";
-  })
+  // .get('/bundle.js', browserify('./client/index.js'),
+  //  { transform: [[ require('babelify'), {presets: ['es2015', 'react']} ]] } )
   .get('/login', (ctx) => {
+
     // req.body with username, password
     // check username in db.users
     // bcrypt.compare password against db.users.password
