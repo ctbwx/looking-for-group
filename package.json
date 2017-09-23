@@ -1,0 +1,43 @@
+{
+  "name": "looking-for-group",
+  "version": "1.0.0",
+  "description": "A web application that connects fellow party goers and table top gamers.",
+  "main": "dbconfig.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simplenclean/looking-for-group.git"
+  },
+  "author": "Antonio Caporicci, Kenny Kang, Rhiannon Le Parmentier, Charlie Wilhite",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simplenclean/looking-for-group/issues"
+  },
+  "homepage": "https://github.com/simplenclean/looking-for-group#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.0",
+    "forever": "^0.15.3",
+    "jquery": "^3.2.1",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1",
+    "koa-session": "^5.5.0",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.12",
+    "nodemon": "^1.12.1",
+    "path": "^0.12.7",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "redux": "^3.7.2"
+  }
+}
