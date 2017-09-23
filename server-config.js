@@ -8,9 +8,9 @@ const app = new Koa();
 const router = new Router();
 const port = 3000;
 
-/*
+
 // Authentication
-app.keys = ['some secret keys'];
+app.keys = ['praise the sun'];
 const CONFIG = {
   key: 'koa:sess',
   maxAge: 86400000,
@@ -21,7 +21,7 @@ const CONFIG = {
 };
 // app.use(session(CONFIG, app));
 app.use( session(app) ); //using default CONFIG above
-*/
+
 
 app.use( bodyParser() );
 
@@ -33,6 +33,7 @@ router
     ctx.body = "Hello World";
   })
   .get('/login', (ctx) => {
+
     // req.body with username, password
     // check username in db.users
     // bcrypt.compare password against db.users.password
