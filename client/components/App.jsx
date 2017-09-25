@@ -2,31 +2,37 @@ import React from 'react';
 import Header from './Header.jsx';
 import Map from './Map.jsx';
 import Pin from './Pin.jsx';
-import api from '../../lib/api.js';
+import { initMap, loadJS, renderMap } from '../../lib/api.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      something: []
+
     }
-    console.log('Hello');
-  }
+    this.initMap = initMap.bind(this);
+    this.renderMap = renderMap.bind(this);
+  };
 
   componentDidMount() {
-    console.log('INIT MAP FUNCTION ', api.initMap)
-    api.renderMap()
-  }
+    console.log('INIT MAP FUNCTION ', this.initMap)
+
+    this.renderMap()
+  };
+
 
   render() {
     return (
       <div>
-        <h1>asdfasdf</h1>
+        <h1>IS THIS WORKING OR WHAT???</h1>
         <Header />
+          <div>
+            <div ref="map" style={{height: '500px', width: '500px'}}></div>
+          </div>
         <Pin />
       </div>
     );
-  }
-}
+  };
+};
 
 export default App
