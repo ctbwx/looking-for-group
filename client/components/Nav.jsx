@@ -16,10 +16,16 @@ class Nav extends React.Component  {
 
   clickListener1() {
     this.setState({logInVisible: !this.state.logInVisible});
+    if (this.state.signUpVisible) {
+      this.setState({signUpVisible: false});
+    }
   }
 
   clickListener2() {
     this.setState({signUpVisible: !this.state.signUpVisible});
+    if (this.state.logInVisible) {
+      this.setState({logInVisible: false});
+    }
   }
 
   clickListener3() {

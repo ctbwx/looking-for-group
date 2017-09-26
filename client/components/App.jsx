@@ -1,8 +1,7 @@
 import React from 'react';
-import Header from './Header.jsx';
-import Map from './Map.jsx';
 import Pin from './Pin.jsx';
 import GOOGLE_API_KEY from './../../config/config.js'
+import Nav from './Nav.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,13 +12,13 @@ class App extends React.Component {
     this.initMap = this.initMap.bind(this);
   }
 
-  componentDidMount() {
+ componentDidMount() {
     // axios.get pins
      window.initMap = this.initMap;
      loadJS(`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&callback=initMap`)
   }
 
-  initMap() {
+ initMap() {
     let myLatLng = {lat: 30.2672, lng: -97.7431}
     let map = new google.maps.Map(this.refs.map, {
       center: myLatLng,
@@ -27,13 +26,16 @@ class App extends React.Component {
     });
   }
 
-  render() {
-    return (
-      <div
-        ref="map"
-        style={{height: '726px', width: '1280px'}}>
-      </div>
-    );
+ render() {
+      return (
+          <div>
+              <Nav />
+              <div
+                  ref="map"
+                  style={{height: '726px', width: '1280px'}}>
+              </div>
+          </div>
+      );
   }
 }
 
