@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import * as Auth from './../../client/models/auth.js'; 
 
 class SignUp extends React.Component {
   constructor (props) {
@@ -11,7 +12,14 @@ class SignUp extends React.Component {
 
   onSubmit (e) {
     //Axios request for signing up
+    e.preventDefault();
+    var username = this.state.username;
+    var password = this.state.password;
+    console.log(username, password);
 
+    Auth.userSignup(username, password);
+
+    document.getElementById("signup").reset();
   }
 
   onChange (e) {
@@ -24,7 +32,7 @@ class SignUp extends React.Component {
 
   render() {
     return (
-        <form className="login-form" onSubmit={this.onSubmit.bind(this)}>
+        <form className="signup-form" id="signup" onSubmit={this.onSubmit.bind(this)}>
           <label>Username: </label>
           <input onChange={this.onChange.bind(this)} type="text" name="username" />
           <label>Password: </label>
