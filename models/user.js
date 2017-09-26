@@ -4,8 +4,9 @@ var bcrypt = require('bcrypt-nodejs');
 var pHash = Promise.promisify(bcrypt.hash);
 
 var userSchema = new mongoose.Schema({
-    username: { type: String, required: true },
-    password: { type: String, required: true }
+    username: { type: String, unique: true, required: true },
+    password: { type: String, required: true },
+    pins: [String]
 });
 
 userSchema.pre('save', function(next) {

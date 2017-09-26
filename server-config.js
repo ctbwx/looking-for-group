@@ -7,6 +7,7 @@ const serve = require('koa-static');
 
 const dbconfig = require('./dbconfig.js'); //uncomment when ready to connect to db
 const User = require('./models/user.js');
+const handler = require('./request-handler.js');
 
 const app = new Koa();
 const router = new Router();
@@ -33,34 +34,35 @@ app.use( bodyParser() );
 app.use( serve(__dirname + '/client') );
 
 router.get('/test', async (ctx, next) => {
-    var newUser = await new User({
-      username: 'testUser',
-      password: 'admin'
-    }).save()
-    .catch( (err) => {
+    try {
+      var newUser = await new User({
+        username: 'testUser',
+        password: 'admin'
+      }).save();
+      console.log(`SAVE TO DB SUCCESS`);
+      ctx.status = 200;
+      ctx.body = {
+        id: newUser._id,
+        username: newUser.username
+      };
+
+    } catch (err) {
       console.log(`FAILED TO SAVE: ${err}`);
       ctx.status = 500;
       ctx.body = `FAILED TO SAVE`;
-    });
 
-    ctx.status = 200;
-
-    ctx.body = {
-      id: newUser._id,
-      username: newUser.username
-    };
-
-  });
+    }
+  })
   // .get('/bundle.js', browserify('./client/index.js'),
   //  { transform: [[ require('babelify'), {presets: ['es2015', 'react']} ]] } )
-  // .get('/login', (ctx) => {
-  //   ctx.body = `you have reached get: /login`;
-  //   // req.body with username, password
-  //   // check username in db.users
-  //   // bcrypt.compare password against db.users.password
-  //   // grant session
-  //   // send db.users.id
-  // })
+  .post('/login', handler.login)
+
+    // req.body with username, password
+    // check username in db.users
+    // bcrypt.compare password against db.users.password
+    // grant session
+    // send db.users.id
+
   // .post('/signup', (ctx) => {
   //   // req.body with username, password
   //   // check username in db.users
@@ -68,7 +70,7 @@ router.get('/test', async (ctx, next) => {
   //   // grant session
   //   // send db.users.id
   // })
-  // .get('/pin', (ctx) => {
+  // .get('/pins', (ctx) => {
   //   // req.body with pin_id
   //   // check pin_id in db.pins.id
   //   //
