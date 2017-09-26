@@ -3,6 +3,7 @@ import Header from './Header.jsx';
 import Map from './Map.jsx';
 import Pin from './Pin.jsx';
 import GOOGLE_API_KEY from './../../config/config.js'
+mport Nav from './Nav.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class App extends React.Component {
     }
     this.initMap = this.initMap.bind(this);
   }
-
+ 
   componentDidMount() {
     // axios.get pins
      window.initMap = this.initMap;
@@ -28,12 +29,15 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div
-        ref="map"
-        style={{height: '726px', width: '1280px'}}>
-      </div>
-    );
+      return (
+          <div>
+              <Nav />
+              <div
+                  ref="map"
+                  style={{height: '726px', width: '1280px'}}>
+              </div>
+          </div>
+      );
   }
 }
 
