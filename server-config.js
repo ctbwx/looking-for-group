@@ -5,7 +5,9 @@ const session = require('koa-session');
 // const browserify = require('browserify-middleware');
 const serve = require('koa-static');
 
-// const config = require('./config.js'); //uncomment when ready to connect to db
+const dbconfig = require('./dbconfig.js'); //uncomment when ready to connect to db
+const User = require('./models/user.js');
+
 const app = new Koa();
 const router = new Router();
 const port = 3000;
@@ -31,10 +33,24 @@ app.use( bodyParser() );
 app.use( serve(__dirname + '/client') );
 
 router
+  .get('/testNewUserDB', function *(next) {
+    var testUser = new User({
+        username: 'testUser',
+        password: 'admin'
+    }).save().then( (newUser) => {
+      this.status = 200;
+      console.log(`SAVE TO DB SUCCESS`)
+      router.body = yield newUser;
+    })
+    .catch( (err) => {
+      console.log(`FAILED TO SAVE: ${err}`)
+      this.body = yield `FAILED TO SAVE`;
+    })
+  })
   // .get('/bundle.js', browserify('./client/index.js'),
   //  { transform: [[ require('babelify'), {presets: ['es2015', 'react']} ]] } )
   .get('/login', (ctx) => {
-
+    ctx.body = `you have reached get: /login`;
     // req.body with username, password
     // check username in db.users
     // bcrypt.compare password against db.users.password
