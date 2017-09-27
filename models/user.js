@@ -11,11 +11,11 @@ var userSchema = new mongoose.Schema({
 
 userSchema.pre('save', function(next) {
   return pHash(this.password, null, null).bind(this)
-  .then( function(hashed){
-    console.log(`hashed pass: ${hashed}`);
-    this.password = hashed;
-    next();
-  });
+    .then( function(hashed){
+      console.log(`hashed pass: ${hashed}`);
+      this.password = hashed;
+      next();
+    });
 });
 
 // userSchema.methods.toJSON = function() {
@@ -30,7 +30,7 @@ var User = mongoose.model('User', userSchema);
 User.checkPassword = function(attemptedPassword, savedPassword, callback){
   bcrypt.compare(attemptedPassword, savedPassword, function(err, match){
     if (err) {
-      return callback(err, false);
+      callback(err, false);
     } else {
       callback(null, match);
     }
