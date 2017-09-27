@@ -43,9 +43,9 @@ router
     // store username/password in database, assign session id
   .get('/logout', userHandler.logout)
     // destroy session, redirect to home
-  .get('/getPins', pinHandler.retrievePins)
+  .get('/get-pins', pinHandler.retrievePins)
     // retrieve pins from db, sends pins to client
-  .post('/newPin', userHandler.checkSession, pinHandler.createPin)
+  .post('/new-pin', pinHandler.createPin)
     // check session
     // create pin
 

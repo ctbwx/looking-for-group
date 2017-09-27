@@ -1,6 +1,7 @@
 ### node etc ###
 package-lock.json
 db/
+mongod.lock
 
 # Logs
 logs
@@ -41,5 +42,3 @@ bower_components/
 
 #Rhi's documentation notes
 notes.md
-
-.gitignore
