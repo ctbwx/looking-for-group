@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var bcrypt = require('bcrypt-nodejs');
+var pCompare = Promise.promisify(bcrypt.compare);
 var pHash = Promise.promisify(bcrypt.hash);
 
 var userSchema = new mongoose.Schema({
@@ -27,14 +28,19 @@ userSchema.pre('save', function(next) {
 
 var User = mongoose.model('User', userSchema);
 
-User.checkPassword = function(attemptedPassword, savedPassword, callback){
-  bcrypt.compare(attemptedPassword, savedPassword, function(err, match){
-    if (err) {
-      callback(err, false);
-    } else {
-      callback(null, match);
-    }
-  });
-}
+// User.checkPassword = function(attemptedPassword, savedPassword, callback){
+//   bcrypt.compare(attemptedPassword, savedPassword, (err, match) => {
+//     if (err) {
+//       callback(err, false);
+//     } else {
+//       callback(null, true);
+//     }
+//   });
+// };
+
+User.checkPassword = function(attemptedPassword, savedPassword){
+  return pCompare(attemptedPassword, savedPassword);
+};
+
 
 module.exports = User;
