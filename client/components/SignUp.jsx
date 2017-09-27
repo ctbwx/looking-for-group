@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Auth from './../../client/models/auth.js'; 
+import * as Auth from './../../client/models/auth.js';
 
 class SignUp extends React.Component {
   constructor (props) {
@@ -8,6 +8,7 @@ class SignUp extends React.Component {
       username: '',
       password: ''
     }
+    this.userSignup = Auth.userSignup
   }
 
   onSubmit (e) {
@@ -15,9 +16,8 @@ class SignUp extends React.Component {
     e.preventDefault();
     var username = this.state.username;
     var password = this.state.password;
-    console.log(username, password);
 
-    Auth.userSignup(username, password);
+    this.userSignup.call(this, username, password);
 
     document.getElementById("signup").reset();
   }

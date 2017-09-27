@@ -1,9 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-export const userLogin = (username, password) => {
-  //Bind This here?
-  console.log('THIS: ', this)
+export const userLogin = function(username, password) {
+
   var context = this;
   axios.post('/login', {
     username: username,
@@ -21,13 +20,16 @@ export const userLogin = (username, password) => {
   });
 };
 
-export const userSignup = (username, password) => {
+export const userSignup = function(username, password) {
+  var context = this;
   axios.post('/signup', {
     username: username,
     password: password
   })
   .then(function (response) {
-    console.log(response);
+    if(response.status === 201  ) {
+      context.props.sessionCheck();
+    }
   })
   .catch(function (error) {
     console.log(error);
