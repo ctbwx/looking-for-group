@@ -6,8 +6,12 @@ class LogIn extends React.Component {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      notFound: false,
+      loggedIn: false,
+      alreadyLoggedIn: false
     }
+    this.userLogin = Auth.userLogin
   }
 
   onSubmit (e) {
@@ -15,9 +19,9 @@ class LogIn extends React.Component {
     e.preventDefault();
     var username = this.state.username;
     var password = this.state.password;
-    console.log(username, password);
 
-    Auth.userLogin(username, password);
+    //Fire function with that makes axios post from Auth.  Bind this to the funtion.  See auth for next step.
+    this.userLogin.call(this, username, password)
 
     document.getElementById("login").reset();
   }
@@ -32,13 +36,18 @@ class LogIn extends React.Component {
 
   render() {
     return (
-        <form className="login-form" id="login" onSubmit={this.onSubmit.bind(this)}>
-          <label>Username: </label>
-          <input onChange={this.onChange.bind(this)} type="text" name="username" />
-          <label>Password: </label>
-          <input onChange={this.onChange.bind(this)} type="password" name="password" />
-          <input type='submit'  value="Log In"/>
-        </form>
+        <div>
+          <form className="login-form" id="login" onSubmit={this.onSubmit.bind(this)}>
+            <label>Username: </label>
+            <input onChange={this.onChange.bind(this)} type="text" name="username" />
+            <label>Password: </label>
+            <input onChange={this.onChange.bind(this)} type="password" name="password" />
+            <input type='submit'  value="Log In"/>
+          </form>
+            {this.state.loggedIn ? <p>Log In Successful!</p> : null}
+            {this.state.notFound ? <p>USERNAME OR PASSWORD NOT FOUND</p> : null}
+            {this.state.alreadyLoggedIn ? <p>USER ALREADY LOGGED IN</p> : null}
+        </div>
       );
     };
 }
