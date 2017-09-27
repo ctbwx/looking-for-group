@@ -16,8 +16,8 @@ exports.checkUsername = async (ctx, next) => {
     } else {
       console.log(`couldn't find user!`);
     }
-    next();
   });
+  await next();
 };
 
 exports.login = async (ctx) => {

@@ -27,8 +27,8 @@ const CONFIG = {
   rolling: false
 };
 // app.use(session(CONFIG, app));
-app.use( session(app) ); //using default CONFIG above
 */
+app.use( session(app) ); //using default CONFIG above
 
 
 app.use( bodyParser() );
@@ -39,16 +39,16 @@ router
     // grant session
     // send db.users.id
   .post('/signup', userHandler.checkUsername, userHandler.signup)
-  //   // grant session
-  //   // send db.users.id
+    // grant session
+    // send db.users.id
 
   .get('/getPins', pinHandler.retrievePins)
-  //   //
+    //
   .post('/newPin', pinHandler.createPin)
-  //   // pin title
-  //   // pin description
-  //   // long, lat
-  //   // host_id
+    // pin title
+    // pin description
+    // long, lat
+    // host_id
   .get('/test', async (ctx, next) => {
       try {
         var newUser = await new User({
