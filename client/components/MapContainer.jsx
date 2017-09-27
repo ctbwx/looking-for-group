@@ -1,18 +1,18 @@
 import React from 'react';
+import GOOGLE_API_KEY from './../../config/config.js';
+import GoogleApiComponent from './../../lib/GoogleApiComponent.js';
+import Marker from './Pin.jsx';
+import Map from './Map.jsx';
 
-export class Container extends React.Component {
+class Container extends React.Component {
     render() {
-        const style = {
-            width: '100vw',
-            height: '100vh'
-        }
         const pos = {lat: 30.2672, lng: -97.7431}
         return (
-            <div style={style}>
+            <div >
                 <Map google={this.props.google}>
-                    <Marker />
                     <Marker position={pos}/>
-                    <Map/>
+                </Map>
+                Hello from Container
             </div>
         )
     }

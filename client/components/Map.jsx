@@ -1,18 +1,22 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Container from './MapContainer.jsx';
+import Nav from './Nav.jsx';
 
-export class Map extends React.Component {
+export default class Map extends React.Component {
     renderChildren() {
-        const {children} = this.props;
-
+        const { children } = this.props;
         if (!children) return;
-
-        return React.Children.map(children, c => {
+        if (!this.props.google) return;
+        let result = React.Children.map(children, c => {
             return React.cloneElement(c, {
                 map: this.map,
                 google: this.props.google,
                 mapCenter: this.state.currentLocation
             });
         })
+        console.log(result)
+        return result
     }
 
     constructor(props) {
@@ -25,26 +29,6 @@ export class Map extends React.Component {
                 lng: lng
             }
         }
-    }
-
-    Map.propTypes = {
-        google: React.PropTypes.object,
-        zoom: React.PropTypes.number,
-        initialCenter: React.PropTypes.object,
-        centerAroundCurrentLocation: React.PropTypes.bool,
-        onMove: React.PropTypes.func
-        evtNames.forEach(e => Map.propTypes[camelize(e)] = T.func)
-    }
-
-    Map.defaultProps = {
-        zoom: 13,
-        // Austin, by default
-        initialCenter: {
-            lat: 30.2672,
-            lng: -97,7431
-        },
-        centerAroundCurrentLocation: false,
-        onMove: function() {} // default prop
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -97,15 +81,14 @@ export class Map extends React.Component {
 
             let {initialCenter, zoom} = this.props;
             const {lat, lng} = this.state.currentLocation;
-            const center = new maps.Latlng(lat, lng);
+            const center = new maps.LatLng(lat, lng);
             const mapConfig = Object.assign({}, {
                 center: center,
                 zoom: zoom
             })
             this.map = new maps.Map(node, mapConfig);
 
-            const evtNames = ['click', 'dragend', 'ready'];
-            evtNames.forEach(e => {
+                       evtNames.forEach(e => {
                 this.map.addListener(e, this.handleEvent(e));
             });
 
@@ -122,12 +105,6 @@ export class Map extends React.Component {
              *     }, 0);
              * })*/
         }
-    }
-
-    const camelize = function(str) {
-        return str.split(' ').map(function(word) {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        }).join('');
     }
 
     handleEvent(evtName) {
@@ -148,10 +125,42 @@ export class Map extends React.Component {
 
     render () {
         return (
-            <div ref='map'>
+            <div>
+            <Nav />
+            <div ref='map'
+            style={{height: '100vh', width: '100vw'}}>
                 Loading map...
                 {this.renderChildren()}
             </div>
+            </div>
         )
     }
+}
+
+const evtNames = ['click', 'dragend', 'ready'];
+
+Map.propTypes = {
+    google: React.PropTypes.object,
+    zoom: React.PropTypes.number,
+    initialCenter: React.PropTypes.object,
+    centerAroundCurrentLocation: React.PropTypes.bool,
+    onMove: React.PropTypes.func,
+    /* evtNames.forEach(e => Map.propTypes[camelize(e)] = T.func)*/
+ }
+
+Map.defaultProps = {
+    zoom: 13,
+    // Austin, by default
+    initialCenter: {
+        lat: 30.2672,
+        lng: -97.7431
+    },
+    centerAroundCurrentLocation: false,
+    onMove: function() {} // default prop
+}
+
+const camelize = function(str) {
+    return str.split(' ').map(function(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join('');
 }

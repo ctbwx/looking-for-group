@@ -1,13 +1,28 @@
 import React from 'react';
+import Map from './Map.jsx';
 
-export class Marker extends React.Component {
+export default class Marker extends React.Component {
 
+    constructor(props) {
+        super(props);
+    }
+
+    /* Marker.propTypes = {
+     *     position: React.PropTypes.object,
+     *     map: React.PropTypes.object
+     * }
+     */
     componentDidUpdate(prevProps) {
         if ((this.props.map !== prevProps.map) ||
             (this.props.position !== prevProps.position)) {
             this.renderMarker();
         }
     }
+
+    componentWillUnmount() {
+        if (this.marker) {
+            this.marker.setMap(null);
+        }}
 
     renderMarker() {
         let {
@@ -19,7 +34,8 @@ export class Marker extends React.Component {
 
         const pref = {
             map: map,
-            position: position
+            position: position,
+            draggable: true
         };
         this.marker = new google.maps.Marker(pref);
 
@@ -42,8 +58,5 @@ export class Marker extends React.Component {
         return null;
     }
 
-    Marker.propTypes = {
-        position: React.PropTypes.object,
-        map: React.PropTypes.object
-    }
 }
+
