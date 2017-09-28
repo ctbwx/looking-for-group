@@ -1,4 +1,5 @@
 const Pin = require('./models/pin.js');
+const User = require('./models/user.js');
 
 
 exports.retrievePins = async (ctx) => {
@@ -25,14 +26,16 @@ exports.createPin = async (ctx) => {
       }
     });
 
-    User.findByIdAndUpdate(newPin_id, { $push: { pins: newPin_id } })
+  User.findByIdAndUpdate(
+    newPin.host_id,
+    {$push: { "pins": newPin._id }},
+    {safe: true, upsert: true, new : true},
+    function(err, model) {
+        console.log(err);
+    }
+  );
 
-    // Tank.findByIdAndUpdate(id, { $set: { size: 'large' }}, { new: true }, function (err, tank) {
-    //   if (err) return handleError(err);
-    //   res.send(tank);
-    // });
-
-    console.log("SUCCESS: NEW PIN SAVED TO DB");
-    ctx.status = 201;
-    ctx.body = "pin: " + newPin._id + " was successfully created."
+  console.log("SUCCESS: NEW PIN SAVED TO DB");
+  ctx.status = 201;
+  ctx.body = "pin: " + newPin._id + " was successfully created."
 };
