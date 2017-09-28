@@ -1,7 +1,10 @@
 ### node etc ###
 package-lock.json
+<<<<<<< 5004d772aec52fde99cdee05a5bb466ea7b8a966
 db/
 mongod.lock
+=======
+>>>>>>> Deployment update
 
 # Logs
 logs
@@ -39,6 +42,9 @@ bower_components/
 .floobit
 .floo
 .flooignore
+<<<<<<< 5004d772aec52fde99cdee05a5bb466ea7b8a966
 
 #Rhi's documentation notes
 notes.md
+=======
+>>>>>>> Deployment update
