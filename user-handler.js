@@ -13,7 +13,7 @@ exports.checkSession = async (ctx, next) => {
 
 
 exports.checkUsername = async (ctx, next) => {
-  // let username = ctx.request.body.username;
+  let username = ctx.request.body.username;
   await User.findOne( {username: ctx.request.body.username} )
     .then( (user) => {
       if(user) {

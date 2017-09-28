@@ -1,4 +1,5 @@
 const Pin = require('./models/pin.js');
+const User = require('./models/user.js');
 
 
 exports.retrievePins = async (ctx) => {
@@ -16,6 +17,7 @@ exports.retrievePins = async (ctx) => {
 exports.createPin = async (ctx) => {
   ctx.request.body.host_id = ctx.session.id;
 
+
   let newPin = await new Pin(ctx.request.body)
     .save( (err) => {
       if(err){
@@ -23,7 +25,17 @@ exports.createPin = async (ctx) => {
         ctx.body = "FAIL: NEW PIN WAS NOT SAVED TO DB";
       }
     });
-    console.log("SUCCESS: NEW PIN SAVED TO DB");
-    ctx.status = 201;
-    ctx.body = "pin: " + newPin._id + " was successfully created."
+
+  User.findByIdAndUpdate(
+    newPin.host_id,
+    {$push: { "pins": newPin._id }},
+    {safe: true, upsert: true, new : true},
+    function(err, model) {
+        console.log(err);
+    }
+  );
+
+  console.log("SUCCESS: NEW PIN SAVED TO DB");
+  ctx.status = 201;
+  ctx.body = "pin: " + newPin._id + " was successfully created."
 };
