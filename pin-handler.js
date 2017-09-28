@@ -16,6 +16,7 @@ exports.retrievePins = async (ctx) => {
 exports.createPin = async (ctx) => {
   ctx.request.body.host_id = ctx.session.id;
 
+
   let newPin = await new Pin(ctx.request.body)
     .save( (err) => {
       if(err){
@@ -23,6 +24,14 @@ exports.createPin = async (ctx) => {
         ctx.body = "FAIL: NEW PIN WAS NOT SAVED TO DB";
       }
     });
+
+    User.findByIdAndUpdate(newPin_id, { $push: { pins: newPin_id } })
+
+    // Tank.findByIdAndUpdate(id, { $set: { size: 'large' }}, { new: true }, function (err, tank) {
+    //   if (err) return handleError(err);
+    //   res.send(tank);
+    // });
+
     console.log("SUCCESS: NEW PIN SAVED TO DB");
     ctx.status = 201;
     ctx.body = "pin: " + newPin._id + " was successfully created."
