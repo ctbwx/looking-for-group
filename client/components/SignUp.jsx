@@ -1,13 +1,16 @@
 import React from 'react';
-import * as Auth from './../../client/models/auth.js'; 
+import * as Auth from './../../client/models/auth.js';
 
 class SignUp extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      signedUp: false,
+      exists: false
     }
+    this.userSignup = Auth.userSignup
   }
 
   onSubmit (e) {
@@ -15,9 +18,8 @@ class SignUp extends React.Component {
     e.preventDefault();
     var username = this.state.username;
     var password = this.state.password;
-    console.log(username, password);
 
-    Auth.userSignup(username, password);
+    this.userSignup.call(this, username, password);
 
     document.getElementById("signup").reset();
   }
@@ -32,13 +34,17 @@ class SignUp extends React.Component {
 
   render() {
     return (
-        <form className="signup-form" id="signup" onSubmit={this.onSubmit.bind(this)}>
-          <label>Username: </label>
-          <input onChange={this.onChange.bind(this)} type="text" name="username" />
-          <label>Password: </label>
-          <input onChange={this.onChange.bind(this)} type="password" name="password" />
-          <input type='submit'  value='Sign Up!'/>
-        </form>
+        <div>
+          <form className="signup-form" id="signup" onSubmit={this.onSubmit.bind(this)}>
+            <label>Username: </label>
+            <input onChange={this.onChange.bind(this)} type="text" name="username" />
+            <label>Password: </label>
+            <input onChange={this.onChange.bind(this)} type="password" name="password" />
+            <input type='submit'  value='Sign Up!'/>
+          </form>
+            {this.state.signedUp ? <p>Sign Up Successful!</p> : null}
+            {this.state.exists ? <p>USERNAME TAKEN</p> : null}
+        </div>
       );
     };
 }
