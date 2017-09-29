@@ -68,6 +68,7 @@ class App extends React.Component {
             icon: './images/blue-zone.png'
         });
 
+
         let infoWindow = new google.maps.InfoWindow({
           content: `hostname: ${partyInfo.name}, title: ${partyInfo.eventTitle}, description: ${partyInfo.Description}`
         });
