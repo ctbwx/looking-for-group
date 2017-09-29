@@ -4,26 +4,13 @@ import Container from './MapContainer.jsx';
 import Nav from './Nav.jsx';
 
 export default class Map extends React.Component {
-    renderChildren() {
-        const { children } = this.props;
-        if (!children) return;
-        if (!this.props.google) return;
-        let result = React.Children.map(children, c => {
-            return React.cloneElement(c, {
-                map: this.map,
-                google: this.props.google,
-                mapCenter: this.state.currentLocation
-            });
-        })
-        console.log(result)
-        return result
-    }
-
     constructor(props) {
         super(props);
 
         const {lat, lng} = this.props.initialCenter;
         this.state = {
+            google: null,
+            map: null,
             currentLocation: {
                 lat: lat,
                 lng: lng
@@ -31,6 +18,21 @@ export default class Map extends React.Component {
         }
     }
 
+    /* renderChildren() {
+     *     const { children } = this.props;
+     *     console.log(children);
+     *     if (!children) return;
+     *     if (!this.props.google) return;
+     *     let result = React.Children.map(children, c => {
+     *         return React.cloneElement(c, {
+     *             google: this.props.google,
+     *             map: this.props.map,
+     *             mapCenter: this.state.currentLocation
+     *         });
+     *     })
+     *     return result;
+     * }
+     */
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.google !== this.props.google) {
             this.loadMap();
@@ -74,6 +76,7 @@ export default class Map extends React.Component {
         if (this.props && this.props.google) {
             // google is available
             const {google} = this.props;
+            this.google = google;
             const maps = google.maps;
 
             const mapRef = this.refs.map;
@@ -88,10 +91,10 @@ export default class Map extends React.Component {
             })
             this.map = new maps.Map(node, mapConfig);
 
-                       evtNames.forEach(e => {
-                this.map.addListener(e, this.handleEvent(e));
-            });
-
+            /* evtNames.forEach(e => {
+               this.map.addListener(e, this.handleEvent(e));
+             * });*/
+            this.setState({map: this.map});
             maps.event.trigger(this.map, 'ready');
 
             /* let centerChangedTimeout;
@@ -107,32 +110,40 @@ export default class Map extends React.Component {
         }
     }
 
-    handleEvent(evtName) {
-        let timeout;
-        const handlerName = `on${camelize(evtName)}`;
-        return (e) => {
-            if(timeout) {
-                clearTimeout(timeout);
-                timeout = null;
-            }
-            timeout = setTimeout(() => {
-                if (this.props[handlerName]) {
-                    this.props[handlerName](this.props, this.map, e);
-                }
-            }, 0);
-        }
-    }
+    /* handleEvent(evtName) {
+     *     let timeout;
+     *     const handlerName = `on${camelize(evtName)}`;
+     *     return (e) => {
+     *         if(timeout) {
+     *             clearTimeout(timeout);
+     *             timeout = null;
+     *         }
+     *         timeout = setTimeout(() => {
+     *             if (this.props[handlerName]) {
+     *                 this.props[handlerName](this.props, this.map, e);
+     *             }
+     *         }, 0);
+     *     }
+     * }
+     */
 
+    /* componentWillReceiveProps (nextProps) {
+     *     if (this.props.google !== nextProps) {
+     *         this.setState({google: nextProps.google});
+     *     }
+     * }*/
     render () {
         return (
             <div>
-            <Nav />
-            <div ref='map'
-            style={{height: '100vh', width: '100vw'}}>
-                Loading map...
-                {this.renderChildren()}
+            <div
+                ref='map'
+                style={{height: '500px', width: '500px'}}>
+                Loading map....
+             {/* {this.renderChildren()} */}
             </div>
+                 <Nav map={this.props.map} google={this.props.google} position={this.props.position}/>
             </div>
+
         )
     }
 }
@@ -140,6 +151,7 @@ export default class Map extends React.Component {
 const evtNames = ['click', 'dragend', 'ready'];
 
 Map.propTypes = {
+    map: React.PropTypes.object,
     google: React.PropTypes.object,
     zoom: React.PropTypes.number,
     initialCenter: React.PropTypes.object,

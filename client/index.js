@@ -1,5 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import GoogleApiComponent from './components/MapContainer.jsx'
+import { Provider } from 'react-redux'
+import { store } from './redux/reducers.js';
+import App from './components/App.jsx';
 
-ReactDOM.render(<GoogleApiComponent />, document.getElementById('app'));
+ReactDOM.render(
+      <Provider store={store}>
+          <App />
+      </Provider>, document.getElementById('app')
+);
+
