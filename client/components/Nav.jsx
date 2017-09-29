@@ -2,22 +2,28 @@ import React from 'react';
 import LogIn from './LogIn.jsx';
 import SignUp from './SignUp.jsx';
 import PinDrop from './PinDrop.jsx';
+import Marker from './Pin.jsx';
+import Map from './Map.jsx';
 import * as Auth from './../../client/models/auth.js';
-
+import { connect } from 'react-redux';
+import { mapUpdater } from '../redux/reducers.js';
+import { markerUpdater } from '../redux/reducers.js';
+import { googleUpdater } from '../redux/reducers.js';
+import App from './App.jsx';
 
 class Nav extends React.Component  {
-  constructor() {
-    super();
+  constructor(props) {
+      super(props);
     this.state = {
       userLoggedIn: false,
       logInVisible: false,
       signUpVisible: false,
       pinDropVisible: false,
-      sessionCheck: this.sessionCheck
+        sessionCheck: this.sessionCheck,
     }
+      this.clickListener3 = this.clickListener3.bind(this);
   }
-
-  sessionCheck() {
+    sessionCheck() {
     //When this function is triggered, the user will then have access to pin dropping.
     this.setState({userLoggedIn: true});
   }
@@ -36,8 +42,9 @@ class Nav extends React.Component  {
     }
   }
 
-  clickListener3() {
-    this.setState({pinDropVisible: !this.state.pinDropVisible});
+    clickListener3() {
+        this.setState({pinDropVisible: !this.state.pinDropVisible});
+        this.props.clickfromApp();
   }
 
   clickListener4() {
@@ -72,10 +79,17 @@ class Nav extends React.Component  {
         </div>
         {this.state.logInVisible ? <LogIn sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
         {this.state.signUpVisible ? <SignUp sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
-        {this.state.pinDropVisible ? <PinDrop /> : null}
+        {this.state.pinDropVisible ? <Marker position={this.props.position} /> : null}
       </div>
     );
   };
 };
 
-export default Nav
+
+const mapStateToProps = (state) => {
+    return {map: state.map, marker: state.marker, google: state.google}
+};
+
+export default Nav = connect(
+    mapStateToProps
+) (Nav);

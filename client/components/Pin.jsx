@@ -1,5 +1,7 @@
 import React from 'react';
 import Map from './Map.jsx';
+import Nav from './Nav.jsx';
+import Container from './MapContainer.jsx';
 
 export default class Marker extends React.Component {
 
@@ -7,12 +9,8 @@ export default class Marker extends React.Component {
         super(props);
     }
 
-    /* Marker.propTypes = {
-     *     position: React.PropTypes.object,
-     *     map: React.PropTypes.object
-     * }
-     */
     componentDidUpdate(prevProps) {
+        const position = {lat: 30.2672, lng: -97.7431};
         if ((this.props.map !== prevProps.map) ||
             (this.props.position !== prevProps.position)) {
             this.renderMarker();
@@ -39,21 +37,21 @@ export default class Marker extends React.Component {
         };
         this.marker = new google.maps.Marker(pref);
 
-        const evtNames = ['click', 'mouseover'];
-        evtNames.forEach(e => {
-            this.marker.addListener(e, this.handleEvent(e));
-        })
+        /* const evtNames = ['click', 'mouseover'];
+         * evtNames.forEach(e => {
+         *     this.marker.addListener(e, this.handleEvent(e));
+         * })*/
     }
 
-    handleEvent(evtName) {
-        return (e) => {
-            const evtName = `on${camelize(evt)}`
-            if (this.props[evtName]) {
-                this.props[evtName](this.props, this.marker, e);
-            }
-        }
-    }
-
+    /* handleEvent(evtName) {
+     *     return (e) => {
+     *         const evtName = `on${camelize(evt)}`
+     *         if (this.props[evtName]) {
+     *             this.props[evtName](this.props, this.marker, e);
+     *         }
+     *     }
+     * }
+     */
     render () {
         return null;
     }
