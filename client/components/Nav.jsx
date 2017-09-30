@@ -47,21 +47,24 @@ class Nav extends React.Component  {
 
   render() {
     return (
-      <div>
+      <div className="nav">
         <div >
-          <nav >
-            <ul>
+          <nav class="navbar navbar-default">
+            <ul className="list-inline">
               <li>
+                <h1>Looking-For-Group</h1>
+              </li>
+              <li >
                 <a href="#" onClick={() => this.clickListener1()}>Log In</a>
               </li>
-              <li>
+              <li >
                 <a href="#" onClick={() => this.clickListener2()}>Sign Up</a>
               </li>
               {this.state.userLoggedIn ?
-              <li>
+              <li >
                 <a href="#" onClick={() => this.clickListener3()}>Drop Pin</a>
               </li> : null}
-              <li>
+              <li >
                 <a href="#" onClick={() => this.clickListener4()}>Log Out</a>
               </li>
             </ul>

@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond');
+
+.nav {
+  background: #b71f2e; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #b71f2e, #e87e3b); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #b71f2e, #e87e3b); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #b71f2e, #e87e3b); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #b71f2e, #e87e3b); /* Standard syntax */
+}
+
+h1 {
+  font-family:'EB Garamond';
+  color: #fdeba0;
+  font-size: 45px;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+a {
+  font-size: 24px;
+  color: lightgrey;
+  font-family:'EB Garamond';
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  border: 1px solid lightgrey;
+}
+
+a:hover {
+    background-color: #fdeba0;
+    text-decoration: none;
+    box-shadow: 2px 2px 1px #999;
+}
+
+#grad {
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(red, yellow); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(red, yellow); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(red, yellow); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(red, yellow); /* Standard syntax */
+}
