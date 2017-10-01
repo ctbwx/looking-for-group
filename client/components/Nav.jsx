@@ -54,9 +54,9 @@ class Nav extends React.Component  {
 
   render() {
     return (
-      <div className="nav">
-        <div >
-          <nav class="navbar navbar-default">
+      <div className="nav-border row">
+        <div className="nav">
+          <nav >
             <ul className="list-inline">
               <li>
                 <h1>Looking-For-Group</h1>

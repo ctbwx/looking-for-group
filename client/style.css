@@ -2,10 +2,18 @@
 
 .nav {
   background: #b71f2e; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left, #b71f2e, #e87e3b); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, #b71f2e, #e87e3b); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, #b71f2e, #e87e3b); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right, #b71f2e, #e87e3b); /* Standard syntax */
+  background: -webkit-linear-gradient(left, #b71f2e 50%, #fec803); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #b71f2e 50%, #fec803); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #b71f2e 50%, #fec803); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #b71f2e 50%, #fec803); /* Standard syntax */
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px 24px;
+}
+
+.nav-border {
+  background:radial-gradient(#b71f2e 75%, #fec803);
+  margin: none;
 }
 
 h1 {
@@ -31,10 +39,26 @@ a:hover {
     box-shadow: 2px 2px 1px #999;
 }
 
-#grad {
-    background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(red, yellow); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(red, yellow); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(red, yellow); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(red, yellow); /* Standard syntax */
+.login-form, .signup-form{
+  font-size: 16px;
+  font-family:'EB Garamond';
+  padding: 5px;
+  width: 60%;
+  margin: 0 auto;
+  float: none;
+}
+
+p {
+  font-family:'EB Garamond';
+  color: #fdeba0;
+  text-align: center;
+  -webkit-animation: fadeOut 2s linear forwards;
+  animation: fadeOut 2s linear forwards;
+}
+
+@-webkit-keyframes fadeOut {
+    0%   {opacity: 1;}
+    70%  {opacity: 1;}
+    90% {opacity: 1;-webkit-transform: translateY(0px);}
+    100% {opacity: 0;-webkit-transform: translateY(-30px);}
 }
