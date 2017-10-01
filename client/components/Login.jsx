@@ -36,17 +36,21 @@ class LogIn extends React.Component {
 
   render() {
     return (
-        <div>
-          <form className="login-form" id="login" onSubmit={this.onSubmit.bind(this)}>
-            <label>Username: </label>
-            <input onChange={this.onChange.bind(this)} type="text" name="username" />
-            <label>Password: </label>
-            <input onChange={this.onChange.bind(this)} type="password" name="password" />
-            <input type='submit'  value="Log In"/>
-          </form>
-            {this.state.loggedIn ? <p>Log In Successful!</p> : null}
-            {this.state.notFound ? <p>USERNAME OR PASSWORD NOT FOUND</p> : null}
-            {this.state.alreadyLoggedIn ? <p>USER ALREADY LOGGED IN</p> : null}
+      <div className="container">
+        <div className="row">
+          <div className="center-block">
+            <form className="login-form" id="login" onSubmit={this.onSubmit.bind(this)}>
+              <label>Username: </label>
+              <input onChange={this.onChange.bind(this)} type="text" name="username" />
+              <label>Password: </label>
+              <input onChange={this.onChange.bind(this)} type="password" name="password" />
+              <input type='submit'  value="Log In"/>
+              {this.state.loggedIn ? <p>Log In Successful!</p> : null}
+              {this.state.notFound ? <p>Username Or Password Not Found</p> : null}
+              {this.state.alreadyLoggedIn ? <p>User Already Logged In</p> : null}
+            </form>
+            </div>
+          </div>
         </div>
       );
     };
