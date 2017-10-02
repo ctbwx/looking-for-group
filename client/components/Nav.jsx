@@ -2,7 +2,7 @@ import React from 'react';
 import LogIn from './LogIn.jsx';
 import SignUp from './SignUp.jsx';
 import PinDrop from './PinDrop.jsx';
-import Marker from './Pin.jsx';
+// import Marker from './Pin.jsx';
 import Map from './Map.jsx';
 import * as Auth from './../../client/models/auth.js';
 import { connect } from 'react-redux';
@@ -42,9 +42,9 @@ class Nav extends React.Component  {
     }
   }
 
-    clickListener3() {
-        this.setState({pinDropVisible: !this.state.pinDropVisible});
-        this.props.clickfromApp();
+  clickListener3() {
+    this.setState({pinDropVisible: !this.state.pinDropVisible});
+    this.props.clickfromApp();
   }
 
   clickListener4() {
@@ -79,7 +79,7 @@ class Nav extends React.Component  {
         </div>
         {this.state.logInVisible ? <LogIn sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
         {this.state.signUpVisible ? <SignUp sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
-        {this.state.pinDropVisible ? <Marker position={this.props.position} /> : null}
+        {/*this.state.pinDropVisible ? <Marker position={this.props.position} /> : null*/}
       </div>
     );
   };
