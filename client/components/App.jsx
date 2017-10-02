@@ -68,7 +68,7 @@ class App extends React.Component {
         });
 
         let infoWindow = new google.maps.InfoWindow({
-          content: partyInfo.name
+          content: `${partyInfo.name} ${partyInfo.eventTitle} ${partyInfo.Description}`
         });
 
         marker.addListener('click', function(){
@@ -90,7 +90,7 @@ class App extends React.Component {
             let latLng = {lat: pin.latitude, lng: pin.longitude};
             this.dropNewPin(
               {
-                name: pin.host_id,
+                name: pin.name,
                 eventTitle: pin.title,
                 Description: pin.description
               },
