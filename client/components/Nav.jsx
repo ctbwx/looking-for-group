@@ -22,10 +22,14 @@ class Nav extends React.Component  {
 
   sessionCheck() {
     //When this function is triggered, the user will then have access to pin dropping.
+      //The function gets passed as props to login and Signup
     this.setState({userLoggedIn: true});
   }
 
+  //All of the click listeners change the state, which then renders the forms associated with each one.
+    //Sorry....not very DRY
   clickListener1() {
+
     this.setState({logInVisible: !this.state.logInVisible});
     if (this.state.signUpVisible) {
       this.setState({signUpVisible: false});
