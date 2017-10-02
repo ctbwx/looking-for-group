@@ -22,9 +22,12 @@ class Nav extends React.Component  {
 
   sessionCheck() {
     //When this function is triggered, the user will then have access to pin dropping.
+      //The function gets passed as props to login and Signup
     this.setState({userLoggedIn: true});
   }
 
+  //All of the click listeners change the state, which then renders the forms associated with each one.
+    //Sorry....not very DRY
   clickListener1() {
     this.setState({logInVisible: !this.state.logInVisible});
     if (this.state.signUpVisible) {
@@ -40,11 +43,12 @@ class Nav extends React.Component  {
   }
 
     clickListener3() {
-        this.setState({pinDropVisible: !this.state.pinDropVisible});
-
+      //This button becomes visible after user is logged in.  The button then renders PinDrop.jsx.
+      this.setState({pinDropVisible: !this.state.pinDropVisible});
     }
 
   clickListener4() {
+    //Destroys session by triggering get requests. All requests live in Auth.js
     Auth.userLogout();
     this.setState({userLoggedIn: false})
   }
@@ -76,15 +80,12 @@ class Nav extends React.Component  {
         </div>
         {this.state.logInVisible ? <LogIn sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
         {this.state.signUpVisible ? <SignUp sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
-        {this.state.pinDropVisible ? <PinDrop onClick={this.props.onClick} clickFromApp={this.props.clickFromApp} partyInfo={this.props.partyInfo} position={this.props.position} /> : null}
+        {this.state.pinDropVisible ? <PinDrop onClick={this.props.onClick} clickFromApp={this.props.clickFromApp} partyInfo={this.props.partyInfo} /> : null}
       </div>
     );
   };
 };
 
 
-const mapStateToProps = (state) => {
-    return {map: state.map, marker: state.marker, google: state.google}
-};
 
 export default Nav

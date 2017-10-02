@@ -15,14 +15,14 @@ class LogIn extends React.Component {
   }
 
   onSubmit (e) {
-    //Axios request for logging in
     e.preventDefault();
     var username = this.state.username;
     var password = this.state.password;
 
-    //Fire function with that makes axios post from Auth.  Bind this to the funtion.  See auth for next step.
+    //Axios request for logging in
+    //Fires function from Auth that logs user in.  Bind this to the funtion.  See auth for next step.
     this.userLogin.call(this, username, password)
-
+    //Resets the form field to empty values.
     document.getElementById("login").reset();
   }
 
