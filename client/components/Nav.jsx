@@ -44,15 +44,9 @@ class Nav extends React.Component  {
     }
   }
 
-<<<<<<< HEAD
-  clickListener3() {
-    this.setState({pinDropVisible: !this.state.pinDropVisible});
-    this.props.clickfromApp();
-=======
     clickListener3() {
         this.setState({pinDropVisible: !this.state.pinDropVisible});
         //this.props.clickFromApp();
->>>>>>> rendering message with pin drop
   }
 
   clickListener4() {
@@ -87,11 +81,7 @@ class Nav extends React.Component  {
         </div>
         {this.state.logInVisible ? <LogIn sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
         {this.state.signUpVisible ? <SignUp sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
-<<<<<<< HEAD
-        {/*this.state.pinDropVisible ? <Marker position={this.props.position} /> : null*/}
-=======
         {this.state.pinDropVisible ? <PinDrop clickFromApp={this.props.clickFromApp} partyInfo={this.props.partyInfo} position={this.props.position} /> : null}
->>>>>>> rendering message with pin drop
       </div>
     );
   };
