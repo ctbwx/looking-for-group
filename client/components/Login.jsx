@@ -39,7 +39,7 @@ class LogIn extends React.Component {
       <div className="container">
         <div className="row">
           <div className="center-block">
-            <form className="login-form" id="login" onSubmit={this.onSubmit.bind(this)}>
+            <form className="login-form form-inline" id="login" onSubmit={this.onSubmit.bind(this)}>
               <label>Username: </label>
               <input onChange={this.onChange.bind(this)} type="text" name="username" />
               <label>Password: </label>
