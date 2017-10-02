@@ -40,22 +40,21 @@ class PinDrop extends React.Component {
 
     render() {
       return (
-        <div className="container">
-          <div className="row">
+          <div className="row text-center">
             <div className="center-block">
-              <form className="signup-form" id="signup" onSubmit={this.onSubmit.bind(this)}>
+              <form className="signup-form form-inline" id="signup" onSubmit={this.onSubmit.bind(this)}>
                 <label>Name: </label>
-                <input onChange={this.onChange.bind(this)} type="text" name="name" />
+                <input className="form-control" onChange={this.onChange.bind(this)} type="text" name="name" />
                 <label>Event Title: </label>
-                <input onChange={this.onChange.bind(this)} type="text" name="eventTitle" />
+                <input className="form-control" onChange={this.onChange.bind(this)} type="text" name="eventTitle" />
                 <label>Description: </label>
-                <input onChange={this.onChange.bind(this)} type="text" name="Description" />
+                <input className="form-control" onChange={this.onChange.bind(this)} type="text" name="Description" />
                 <input type='submit'  value='Party Time!'/>
-                <button onClick={this.props.onClick}>Save Party</button>
               </form>
               </div>
+              <button className="btn center-block" onClick={this.props.onClick}>Save Party</button>
             </div>
-          </div>
+
         );
       }
 }
