@@ -1,7 +1,5 @@
 import React from 'react';
-import Map from './Map.jsx';
 import Nav from './Nav.jsx';
-import Container from './MapContainer.jsx';
 
 export default class Marker extends React.Component {
 
@@ -57,4 +55,3 @@ export default class Marker extends React.Component {
     }
 
 }
-

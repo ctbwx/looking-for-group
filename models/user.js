@@ -19,24 +19,7 @@ userSchema.pre('save', function(next) {
     });
 });
 
-// userSchema.methods.toJSON = function() {
-//   return {
-//     _id: this._id,
-//     username: this.username
-//   }
-// }
-
 var User = mongoose.model('User', userSchema);
-
-// User.checkPassword = function(attemptedPassword, savedPassword, callback){
-//   bcrypt.compare(attemptedPassword, savedPassword, (err, match) => {
-//     if (err) {
-//       callback(err, false);
-//     } else {
-//       callback(null, true);
-//     }
-//   });
-// };
 
 User.checkPassword = function(attemptedPassword, savedPassword){
   return pCompare(attemptedPassword, savedPassword);

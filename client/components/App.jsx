@@ -2,11 +2,6 @@ import React from 'react';
 import Nav from './Nav.jsx';
 import Axios from 'axios';
 import GOOGLE_API_KEY from '../../config/config.js';
-import { connect } from 'react-redux';
-import { dispatch } from 'redux';
-import { mapUpdater } from '../redux/reducers.js';
-import { markerUpdater } from '../redux/reducers.js';
-import { googleUpdater } from '../redux/reducers.js';
 
 class App extends React.Component {
     constructor(props) {
@@ -128,5 +123,4 @@ function loadJS(src) {
     ref.parentNode.insertBefore(script, ref);
 }
 
-App = connect()(App);
 export default App
