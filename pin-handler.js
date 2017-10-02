@@ -17,7 +17,6 @@ exports.retrievePins = async (ctx) => {
 exports.createPin = async (ctx) => {
   ctx.request.body.host_id = ctx.session.id;
 
-
   let newPin = await new Pin(ctx.request.body)
     .save( (err) => {
       if(err){
