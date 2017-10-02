@@ -65,8 +65,9 @@ class App extends React.Component {
             position: latLng,
             map: this.state.map,
             draggable: draggable,
-            icon: './images/blue-zone.png'
+            icon: './images/Polygon.png'
         });
+
 
         let infoWindow = new google.maps.InfoWindow({
           content: `hostname: ${partyInfo.name}, title: ${partyInfo.eventTitle}, description: ${partyInfo.Description}`
