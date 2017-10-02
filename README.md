@@ -23,3 +23,6 @@ N: Node
 >7: If you want to deploy talk to Charlie Wilhite (ctbwilhite@gmail.com) I'll have to push your changes to the AWS instance.
 
 >8: Go to googles developer console and apply for a google maps API key. Export it from path "config/config.js".
+
+# Helpful links:
+> http://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
