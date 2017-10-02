@@ -14,13 +14,14 @@ class SignUp extends React.Component {
   }
 
   onSubmit (e) {
-    //Axios request for signing up
     e.preventDefault();
     var username = this.state.username;
     var password = this.state.password;
 
+    //Axios request for signing up
+    //Fires function from Auth that adds user to the database.  Bind this to the funtion.  See auth for next step.
     this.userSignup.call(this, username, password);
-
+    //Resets form field to empty values.
     document.getElementById("signup").reset();
   }
 
