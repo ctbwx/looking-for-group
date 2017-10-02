@@ -37,7 +37,7 @@ class SignUp extends React.Component {
       <div className="container">
         <div className="row">
           <div className="center-block">
-            <form className="signup-form" id="signup" onSubmit={this.onSubmit.bind(this)}>
+            <form className="signup-form form-inline" id="signup" onSubmit={this.onSubmit.bind(this)}>
               <label>Username: </label>
               <input onChange={this.onChange.bind(this)} type="text" name="username" />
               <label>Password: </label>
