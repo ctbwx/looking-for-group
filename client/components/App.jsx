@@ -41,6 +41,7 @@ class App extends React.Component {
       console.log(this.state.partyInfo)
 
       Axios.post('/new-pin', {
+        name: this.state.partyInfo.name,
         title: this.state.partyInfo.eventTitle,
         description: this.state.partyInfo.Description,
         longitude: this.state.lng,
@@ -68,7 +69,7 @@ class App extends React.Component {
         });
 
         let infoWindow = new google.maps.InfoWindow({
-          content: partyInfo.name
+          content: `hostname: ${partyInfo.name}, title: ${partyInfo.eventTitle}, description: ${partyInfo.Description}`
         });
 
         marker.addListener('click', function(){
@@ -86,11 +87,11 @@ class App extends React.Component {
         .then((res) => {
           res.data.forEach(pin => {
             // this.setState({marker: pin});
-            console.log(`pin data ${pin}`)
+            console.log("pin data",pin)
             let latLng = {lat: pin.latitude, lng: pin.longitude};
             this.dropNewPin(
               {
-                name: pin.host_id,
+                name: pin.name,
                 eventTitle: pin.title,
                 Description: pin.description
               },
