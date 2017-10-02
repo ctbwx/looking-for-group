@@ -1,6 +1,6 @@
 const User = require('./models/user.js');
 
-
+// Checks the session to see if a user is logged in.
 exports.checkSession = async (ctx, next) => {
   let isLoggedIn = ctx.session? !!ctx.session.id : false;
   if ( isLoggedIn ) {
@@ -11,7 +11,7 @@ exports.checkSession = async (ctx, next) => {
   }
 };
 
-
+// Checks the username to see if the username exists in the DB.
 exports.checkUsername = async (ctx, next) => {
   let username = ctx.request.body.username;
   await User.findOne( {username: ctx.request.body.username} )
@@ -23,7 +23,7 @@ exports.checkUsername = async (ctx, next) => {
   await next();
 };
 
-
+// Checks to see if the user id is already associated with the session, if so dipsplays and error, if not sets the session id to the user id.
 exports.login = async (ctx) => {
   if(!ctx.user){
     ctx.status = 404;
@@ -51,7 +51,7 @@ exports.login = async (ctx) => {
   }
 };
 
-
+// Removed the session id property.
 exports.logout = (ctx) => {
   let id = ctx.session.id;
   ctx.session = null;
@@ -59,7 +59,7 @@ exports.logout = (ctx) => {
   // ctx.redirect('/');
 };
 
-
+// Saves the user and hashed pw to the DB if the user doesn't exist.
 exports.signup = async (ctx) => {
   if(ctx.user){
     ctx.status = 400;
