@@ -65,7 +65,7 @@ class App extends React.Component {
             position: latLng,
             map: this.state.map,
             draggable: draggable,
-            icon: './images/blue-zone.png'
+            icon: './images/Polygon.png'
         });
 
 
