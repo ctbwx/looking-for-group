@@ -1,6 +1,6 @@
 import React from 'react'
 import Nav from './Nav.jsx'
-
+ 
 class PinDrop extends React.Component {
   constructor (props) {
     super(props)
@@ -14,7 +14,7 @@ class PinDrop extends React.Component {
   }
 
   onChange (e) {
-    //Update form as user inputs text
+    //Updates state as user inputs any text value into the forms defined in the render section. 
     e.preventDefault();
     var key = e.target.name
     var value = e.target.value
@@ -22,7 +22,8 @@ class PinDrop extends React.Component {
   }
 
   onSubmit (e) {
-    //Axios request for signing up
+      // setting the text input values from the Host Party form, and then sets them to an object.
+      // partyInfo, which is sent down from App.jsx, is then called with this object. 
     e.preventDefault();
     var name = this.state.name;
     var eventTitle = this.state.eventTitle;
@@ -32,10 +33,7 @@ class PinDrop extends React.Component {
       eventTitle: eventTitle,
       Description: Description
     }
-
       this.props.partyInfo(obj);
-
-
     }
 
     render() {

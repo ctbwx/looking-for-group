@@ -11,3 +11,10 @@ dist/
 
 # Dependency directorys
 node_modules/
+
+
+.DS_Store
+client/.DS_Store
+client/components/.DS_Store
+client/images/.DS_Store
+
