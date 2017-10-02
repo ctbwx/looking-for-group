@@ -16,7 +16,8 @@ class App extends React.Component {
             initMap: this.initMap,
             myLatLng: this.myLatLng,
             map: null,
-            dropNewPin: null
+            dropNewPin: null,
+            marker: {}
         }
         this.initMap = this.initMap.bind(this);
         this.partyInfo = this.partyInfo.bind(this);
@@ -30,8 +31,23 @@ class App extends React.Component {
 
     partyInfo(obj) {
 
-      this.dropNewPin(obj.name);
-      console.log(this, this.state, obj)
+      this.dropNewPin(obj);
+
+    }
+
+    onClick(e) {
+      e.preventDefault();
+
+      console.log(this.state.partyInfo)
+
+      Axios.post('/new-pin', {
+        title: this.state.partyInfo.eventTitle,
+        description: this.state.partyInfo.Description,
+        longitude: this.state.lng,
+        latitude: this.state.lat
+      }).then(function(response){
+        console.log(response)
+      });
     }
 
     initMap() {
@@ -43,21 +59,42 @@ class App extends React.Component {
       });
       self.setState({map: map});
       self.setState({myLatLng: myLatLng})
-      this.dropNewPin = function (latLng = {lat: 30.2672, lng: -97.7431}, draggable = true) {
+      this.dropNewPin = function (partyInfo, latLng = {lat: 30.2672, lng: -97.7431}, draggable = true) {
         let marker = new google.maps.Marker({
             position: latLng,
             map: this.state.map,
             draggable: draggable,
             icon: './images/blue-zone.png'
         });
+
+        let infoWindow = new google.maps.InfoWindow({
+          content: partyInfo.name
+        });
+
+        marker.addListener('click', function(){
+          infoWindow.open(map, marker);
+        });
+
+        marker.addListener('dragend', function(){
+          self.setState({lat: marker.getPosition().lat(), lng: marker.getPosition().lng()})
+        })
+        this.setState({partyInfo: partyInfo})
+        this.setState({marker: marker})
       }
       self.setState({dropNewPin: this.dropNewPin.bind(this)})
       Axios.get('/get-pins')
         .then((res) => {
           res.data.forEach(pin => {
+            // this.setState({marker: pin});
             console.log(`pin data ${pin}`)
             let latLng = {lat: pin.latitude, lng: pin.longitude};
-            this.dropNewPin(latLng, false);
+            this.dropNewPin(
+              {
+                name: pin.host_id,
+                eventTitle: pin.title,
+                Description: pin.description
+              },
+              latLng, false);
         });
       })
     }
@@ -70,6 +107,7 @@ class App extends React.Component {
                  <Nav clickFromApp={this.state.dropNewPin}
                       initMap={this.initMap.bind(this)}
                       partyInfo={this.partyInfo.bind(this)}
+                      onClick={this.onClick.bind(this)}
                       />
                 <div
                     ref="map"

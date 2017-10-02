@@ -46,8 +46,8 @@ class Nav extends React.Component  {
 
     clickListener3() {
         this.setState({pinDropVisible: !this.state.pinDropVisible});
-        //this.props.clickFromApp();
-  }
+
+    }
 
   clickListener4() {
     Auth.userLogout();
@@ -81,7 +81,7 @@ class Nav extends React.Component  {
         </div>
         {this.state.logInVisible ? <LogIn sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
         {this.state.signUpVisible ? <SignUp sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
-        {this.state.pinDropVisible ? <PinDrop clickFromApp={this.props.clickFromApp} partyInfo={this.props.partyInfo} position={this.props.position} /> : null}
+        {this.state.pinDropVisible ? <PinDrop onClick={this.props.onClick} clickFromApp={this.props.clickFromApp} partyInfo={this.props.partyInfo} position={this.props.position} /> : null}
       </div>
     );
   };
