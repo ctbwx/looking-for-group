@@ -12,18 +12,26 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            party: '',
             initMap: this.initMap,
             myLatLng: this.myLatLng,
             map: null,
             dropNewPin: null
         }
         this.initMap = this.initMap.bind(this);
+        this.partyInfo = this.partyInfo.bind(this);
     }
 
     componentDidMount() {
       window.initMap = this.initMap;
 
       loadJS(`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&callback=initMap`);
+    }
+
+    partyInfo(obj) {
+
+      this.dropNewPin(obj.name);
+      console.log(this, this.state, obj)
     }
 
     initMap() {
@@ -55,11 +63,14 @@ class App extends React.Component {
     }
 
 
+
     render() {
         return (
              <div>
-                 <Nav clickfromApp={this.state.dropNewPin}
-                      initMap={this.initMap.bind(this)} />
+                 <Nav clickFromApp={this.state.dropNewPin}
+                      initMap={this.initMap.bind(this)}
+                      partyInfo={this.partyInfo.bind(this)}
+                      />
                 <div
                     ref="map"
                     style={{height: '100vh', width: '100vw'}}>

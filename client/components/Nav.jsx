@@ -13,17 +13,19 @@ import App from './App.jsx';
 
 class Nav extends React.Component  {
   constructor(props) {
-      super(props);
+    super(props);
+    console.log(this.props)
     this.state = {
       userLoggedIn: false,
       logInVisible: false,
       signUpVisible: false,
       pinDropVisible: false,
-        sessionCheck: this.sessionCheck,
+      sessionCheck: this.sessionCheck
     }
       this.clickListener3 = this.clickListener3.bind(this);
   }
-    sessionCheck() {
+
+  sessionCheck() {
     //When this function is triggered, the user will then have access to pin dropping.
     this.setState({userLoggedIn: true});
   }
@@ -42,9 +44,15 @@ class Nav extends React.Component  {
     }
   }
 
+<<<<<<< HEAD
   clickListener3() {
     this.setState({pinDropVisible: !this.state.pinDropVisible});
     this.props.clickfromApp();
+=======
+    clickListener3() {
+        this.setState({pinDropVisible: !this.state.pinDropVisible});
+        //this.props.clickFromApp();
+>>>>>>> rendering message with pin drop
   }
 
   clickListener4() {
@@ -69,7 +77,7 @@ class Nav extends React.Component  {
               </li>
               {this.state.userLoggedIn ?
               <li >
-                <a href="#" onClick={() => this.clickListener3()}>Drop Pin</a>
+                <a href="#"  onClick={() => this.clickListener3()}>Host Party</a>
               </li> : null}
               <li >
                 <a href="#" onClick={() => this.clickListener4()}>Log Out</a>
@@ -79,7 +87,11 @@ class Nav extends React.Component  {
         </div>
         {this.state.logInVisible ? <LogIn sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
         {this.state.signUpVisible ? <SignUp sessionCheck={this.state.sessionCheck.bind(this)}/> : null}
+<<<<<<< HEAD
         {/*this.state.pinDropVisible ? <Marker position={this.props.position} /> : null*/}
+=======
+        {this.state.pinDropVisible ? <PinDrop clickFromApp={this.props.clickFromApp} partyInfo={this.props.partyInfo} position={this.props.position} /> : null}
+>>>>>>> rendering message with pin drop
       </div>
     );
   };
